@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<!--Ideas for Improvement
+		1. Add button to animate divs.
+		2. Add button to reset
+		3. When double click to explode, automatically add a new div w/color
+		4. Make it so shapes are objects
+		5. Make it so user can select shapes to add
+		6. Separate JS, CSS and HTML
+	-->
+		
+		
+	<title>Rainbow Mayonnaise Deluxe</title>
+		<style>
+			<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+		</style>
+		<style>
+			body {
+				background-color: black;
+			}
+		
+			#Container {
+				width: 1000px;
+				height: 600px;
+				margin: 0 auto;
+				display: flex;
+				margin-top: 100px;
+				flex-direction: row;
+				flex-wrap: wrap;
+			}
+			
+			.circle {
+				width: 100px;
+				height: 100px;
+				-moz-border-radius: 50px;
+				-webkit-border-radius: 50px;
+				border-radius: 50px;
+			}
+			
+			.square {
+				width: 100px;
+				height: 100px;
+			}
+			
+			.triangle {
+				width: 0;
+				height: 0;
+				border-left: 50px solid transparent;
+				border-right: 50px solid transparent;
+				border-bottom: 100px solid;
+			}
+		
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+		<script>
+		
+			$(function(){
+
+				var color = ["rgb(255, 0, 0)", "rgb(255, 165, 0)", "rgb(255, 255, 0)", "rgb(0, 128, 0)", "rgb(0, 0, 255)", "rgb(128, 0, 128)"];
+				var shape = ["circle", "square", "triangle"];
+				var circles = document.getElementsByClassName("circle");
+				var colorLength = color.length;
+				var shapeLength = shape.length;
+				var circlesLength = circles.length;
+				var currentColor;
+				var randomNum;
+				
+
+				function setRandomNum(length, currentIndex) {
+
+					var randomNum
+
+					do {
+						randomNum = Math.floor(Math.random() * length);
+					}
+					while (randomNum===currentIndex);
+
+					return randomNum;
+				}
+			
+
+				// On page load, loop through divs and assign a random background color to each
+				for (var i=0; i<=circlesLength-1; i++) {	
+
+					var randomNum = setRandomNum(colorLength);
+
+					// var circleId = circles[i].id;
+					// $("#" + circleId).css("background-color", color[randomNum]);
+
+					console.log(circles[i]);
+
+					circles[i].setAttribute("style", "background-color: " + color[randomNum]);
+				}
+
+				$(".circle").draggable();
+
+				// When mousing over a div, change its background to a random color
+			    $(".circle").mouseenter(function(){
+
+			    	if ($(this).css("background-color") != "rgba(0, 0, 0, 0)") {
+			    		currentColor = $(this).css("background-color");
+			    	} else {
+			    		currentColor = $(this).css("color");
+			    	}
+
+                    currentIndex = color.indexOf(currentColor);
+
+					if ($(this).hasClass('circle') || $(this).hasClass('square')) {
+
+			           $(this).css("background-color", color[setRandomNum(colorLength, currentIndex)]);
+	
+			       } else if ($(this).hasClass('triangle')) {
+
+			       	   $(this).css({"background-color":"", "color":color[setRandomNum(colorLength, currentIndex)]});
+
+			       }
+
+			    });
+				
+				//When clicking on a div, change its shape to a random shape
+				$(".circle").click(function() {            
+                    
+                    var currentIndex = shape.indexOf($(this).attr('class').split(" ")[0]);
+                    
+					$(this).removeClass($(this).attr('class')).addClass(shape[setRandomNum(shapeLength, currentIndex)]);	
+
+					if ($(this).hasClass('triangle')) {
+						$(this).css({"background-color":"", "color":currentColor});
+					} else {
+						$(this).css({"background-color":currentColor, "color":""});
+					}
+
+				});
+				
+				//When double clicking on a div, make it essplode
+				$(".circle").dblclick(function() {
+					$(this).effect('explode');
+				});
+
+			});
+			
+		</script>
+</head>
+
+<body>
+	<div id="Container">
+		<!--Row 1-->
+		<div class = "circle" id="1">
+		</div>
+	
+		<div class = "circle" id="2">
+		</div>
+		
+		<div class = "circle" id="3">
+		</div>
+	
+		<div class = "circle" id="4">
+		</div>
+		
+		<div class = "circle" id="5">
+		</div>
+	
+		<div class = "circle" id="6">
+		</div>
+		
+		<div class = "circle" id="7">
+		</div>
+	
+		<div class = "circle" id="8">
+		</div>
+		
+		<div class = "circle" id="9">
+		</div>
+	
+		<div class = "circle" id="10">
+		</div>
+		
+		<div class = "circle" id="11">
+		</div>
+		
+		<div class = "circle" id="12">
+		</div>
+		
+		<div class = "circle" id="13">
+		</div>
+	
+		<div class = "circle" id="14">
+		</div>
+		
+		<div class = "circle" id="15">
+		</div>
+	
+		<div class = "circle" id="16">
+		</div>
+		
+		<div class = "circle" id="17">
+		</div>
+	
+		<div class = "circle" id="18">
+		</div>
+		
+		<div class = "circle" id="19">
+		</div>
+	
+		<div class = "circle" id="20">
+		</div>
+		
+		<div class = "circle" id="21">
+		</div>
+	
+		<div class = "circle" id="22">
+		</div>
+		
+		<div class = "circle" id="23">
+		</div>
+	
+		<div class = "circle" id="24">
+		</div>
+		
+		<div class = "circle" id="25">
+		</div>
+		
+		<div class = "circle" id="26">
+		</div>
+		
+		<div class = "circle" id="27">
+		</div>
+	
+		<div class = "circle" id="28">
+		</div>
+		
+		<div class = "circle" id="29">
+		</div>
+	
+		<div class = "circle" id="30">
+		</div>
+		
+		<div class = "circle" id="31">
+		</div>
+	
+		<div class = "circle" id="32">
+		</div>
+		
+		<div class = "circle" id="33">
+		</div>
+	
+		<div class = "circle" id="34">
+		</div>
+		
+		<div class = "circle" id="35">
+		</div>
+	
+		<div class = "circle" id="36">
+		</div>
+		
+		<div class = "circle" id="37">
+		</div>
+	
+		<div class = "circle" id="38">
+		</div>
+		
+		<div class = "circle" id="39">
+		</div>
+		
+		<div class = "circle" id="40">
+		</div>
+		
+		<div class = "circle" id="41">
+		</div>
+	
+		<div class = "circle" id="42">
+		</div>
+		
+		<div class = "circle" id="43">
+		</div>
+	
+		<div class = "circle" id="44">
+		</div>
+		
+		<div class = "circle" id="45">
+		</div>
+	
+		<div class = "circle" id="46">
+		</div>
+		
+		<div class = "circle" id="47">
+		</div>
+	
+		<div class = "circle" id="48">
+		</div>
+		
+		<div class = "circle" id="49">
+		</div>
+	
+		<div class = "circle" id="50">
+		</div>
+		
+		<div class = "circle" id="51">
+		</div>
+	
+		<div class = "circle" id="52">
+		</div>
+		
+		<div class = "circle" id="53">
+		</div>
+		
+		<div class = "circle" id="54">
+		</div>
+		
+		<div class = "circle" id="55">
+		</div>
+	
+		<div class = "circle" id="56">
+		</div>
+		
+		<div class = "circle" id="57">
+		</div>
+	
+		<div class = "circle" id="58">
+		</div>
+		
+		<div class = "circle" id="59">
+		</div>
+	
+		<div class = "circle" id="60">
+		</div>
+		
+		<div class = "circle" id="61">
+		</div>
+	
+		<div class = "circle" id="62">
+		</div>
+		
+		<div class = "circle" id="63">
+		</div>
+	
+		<div class = "circle" id="64">
+		</div>
+		
+		<div class = "circle" id="65">
+		</div>
+	
+		<div class = "circle" id="66">
+		</div>
+		
+		<div class = "circle" id="67">
+		</div>
+		
+		<div class = "circle" id="68">
+		</div>
+		
+		<div class = "circle" id="69">
+		</div>
+	
+		<div class = "circle" id="70">
+		</div>
+	
+	</div>
+		
+</body>
+
+</html>
